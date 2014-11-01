@@ -1,0 +1,7 @@
+---
+title: Docker for Sinatra Development
+layout: post
+draft: true
+---
+
+Write about running/developing Sinatra in a docker container using shotgun and docker volumes to instantly deploy
