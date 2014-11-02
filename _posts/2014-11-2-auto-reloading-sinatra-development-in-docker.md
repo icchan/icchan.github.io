@@ -20,7 +20,7 @@ docker run training/sinatra run gem install shotgun
 Now to run it so it auto-reloads from your local folder run a command like this:
 
 ```bash
-docker run -d -p {host-port-to-expose}:9393 -v {absolute-local-path}:/app icchan/shotgun-sinatra shotgun --host 0.0.0.0 /app/{your-app}.rb 
+docker run -d -p {port-on-host}:9393 -v {absolute-local-path}:/app icchan/shotgun-sinatra shotgun --host 0.0.0.0 /app/{your-app}.rb 
 ```
 
 So heres a breakdown:
@@ -31,12 +31,12 @@ So heres a breakdown:
 * `icchan/shotgun-sinatra` is the name of the shotgun image
 * `shotgun --host 0.0.0.0 /app/{your-app}.rb` is the command to run on the image, the 0.0.0.0 is to make accessible outside the container (default is 127.0.0.1)
 
-So if your app is in /home/ruby/app/hello.rb on your host and you want to run it on 8080 would run this command:
+So if your app is in `/home/ruby/app/hello.rb` on your host and you want to run it on 8080 you would run this command:
 
 ```bash
 docker run -d -p 8080:9393 -v /home/ruby/app:/app icchan/shotgun-sinatra shotgun --host 0.0.0.0 /app/hello.rb 
 ```
 
-It will now be accessible at port 8080 on your host. If you are using boot2docker its probably http://192.168.59.103:8080
+It will now be accessible at port 8080 on your host. If you are using boot2docker its probably `http://192.168.59.103:8080`.
 
-Now if you edit the file /home/ruby/app/hello.rb on your host machine, the changes will automagically be reflected in the running app :)
+Now edit the file `/home/ruby/app/hello.rb` on your host machine, the changes will automagically be reflected in the running app :)
