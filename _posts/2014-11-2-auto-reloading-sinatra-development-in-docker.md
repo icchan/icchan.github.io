@@ -5,8 +5,8 @@ layout: post
 So I've been investigating [Docker](https://www.docker.com/) recently, and its pretty great.
 
 One cool feature which has been particularly useful for me is [mounting a directory on the host machine inside the docker container](https://docs.docker.com/userguide/dockervolumes/#mount-a-host-directory-as-a-data-volume).
-It is useful in a dev environment to auto-reload new changes without building a new container or restarting a container.
-If you are running an app which auto-reloads you can run file in a mounted folder, and edit the files locally (on the docker host) and see them reflected in the running containter. This works great with scripting languages (like Ruby or PHP) as well as cross platform languages (like Java). 
+It is great for a dev environment to auto-reload new changes without building a new container or restarting a container.
+If you are running an app which auto-reloads you can run a file in a mounted folder, and edit the files locally (on the docker host) and see them reflected in the running containter. Very handy for scripting languages (like Ruby or PHP) as well as cross platform languages (like Java). 
 
 I'll go through how I have been doing it for a [Sinatra](http://www.sinatrarb.com/) app running with [Shotgun](https://github.com/rtomayko/shotgun) (auto-reloader for rackup).
 
@@ -26,8 +26,8 @@ docker run -d -p {host-port-to-expose}:9393 -v {absolute-local-path}:/app icchan
 So heres a breakdown:
 
 * `-d` means run as daemon
-* `-p {host-port-to-expose}:9393` exposes and publishes the port to your host
-* `-v {absolute-local-path}:/app` mounts the local folder to /app
+* `-p {host-port-to-expose}:9393` exposes and publishes port 9393 (shotgun default port) to your host 
+* `-v {absolute-local-path}:/app` mounts the local folder to /app in the container
 * `icchan/shotgun-sinatra` is the name of the shotgun image
 * `shotgun --host 0.0.0.0 /app/{your-app}.rb` is the command to run on the image, the 0.0.0.0 is to make accessible outside the container (default is 127.0.0.1)
 
